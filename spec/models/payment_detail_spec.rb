@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe PaymentDetail do
-<<<<<<< HEAD
-  pending "add some examples to (or delete) #{__FILE__}"
-=======
+
   let(:user) { FactoryGirl.create(:user) }
   let(:board) { FactoryGirl.create(:board, user: user) }
   let(:ad) { FactoryGirl.create(:advertisement, user: user, board: board) }
@@ -61,5 +59,4 @@ describe PaymentDetail do
       end
     end
   end
->>>>>>> 24026ba97818d30b31fb88c2a51d5e2104d394a1
 end
