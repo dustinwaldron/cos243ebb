@@ -42,14 +42,22 @@ describe "AdvertisementPages" do
 	expect { click_button submit }.to change(PaymentDetail, :count).by(1)
       end
 
+      it 'should create width x height tiles' do
+	expect do
+	  click_button submit
+	end.to change(Tile, :count).by(15)
+      end
+
       describe 'after saving the advertisment' do
-	let(:ad) { Advertisement.find_by_board_id(board) }
+	let(:ad) { Advertisement.last }
+	let(:payment) { ad.payment_details.first }
 
 	before { click_button submit }
 
 	specify { ad.board.should == board }
 	specify { ad.user.should == user }
-	specify { ad.payment_details.first.amount.should == ad.width * ad.height }
+	specify { payment.amount.should == ad.width * ad.height }
+
 	it { should have_success('Advertisement created') }
 	it { should have_content(ad.width) }
 	it { should have_content(ad.height) }
