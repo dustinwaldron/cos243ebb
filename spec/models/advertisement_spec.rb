@@ -16,6 +16,8 @@ describe Advertisement do
   it { should respond_to(:board) }
   it { should respond_to(:board_id) }
   it { should respond_to(:image) }
+  it { should respond_to(:image_contents=) }
+  it { should respond_to(:charge) }
 
   describe 'accessible attributes' do
     it 'should not allow access to user_id' do
