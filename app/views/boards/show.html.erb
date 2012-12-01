@@ -1,0 +1,15 @@
+<% provide(:title, @board.name) %>
+
+<div class="row">
+	<div class="pull-left"><h1><%= @board.name %></h1></div>
+</div>
+<div class="board" style="background-image: url(<%= asset_path 'tile.png' %>); border-style:double;position: relative; width: <%= Integer(@board.width) * 64 %>px; height: <%= Integer(@board.height) * 64 %>px;">
+</div>
+<br>
+<div>
+	<div style='color:white;'><%= @board.timezone %></div>
+	<div style='color:white;'><%= "Created by: #{@board.user.name}" %></div>
+	<div style='color:white;'><%= "Width: #{pluralize(@board.width, 'tile')}" %></div>
+	<div style='color:white;'><%= "Height: #{pluralize(@board.height, 'tile')}" %></div>
+	<div style='color:white;'><%= link_to "Create advertisement", '#', query: @board.id, class: "btn btn-medium btn-inverse" %></div>
+</div>
