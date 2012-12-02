@@ -16,4 +16,8 @@ class Board < ActiveRecord::Base
   validates :timezone, presence: true
   validates_inclusion_of :timezone, in: ActiveSupport::TimeZone.zones_map { |m| m.name }, message: "is not a valid Timezone"
 
+  #Do stuff
+  def age
+  end
+
 end

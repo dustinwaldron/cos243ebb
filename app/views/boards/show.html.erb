@@ -3,7 +3,11 @@
 <div class="row">
 	<div class="pull-left"><h1><%= @board.name %></h1></div>
 </div>
-<div class="board" style="background-image: url(<%= asset_path 'tile.png' %>); border-style:double;position: relative; width: <%= Integer(@board.width) * 64 %>px; height: <%= Integer(@board.height) * 64 %>px;">
+<div class="board" style="background-image: url(<%= asset_path 'tile.png' %>); border-style:solid;border-color:gray;border-width:15px;position: relative; width: <%= Integer(@board.width) * 64 %>px; height: <%= Integer(@board.height) * 64 %>px;">
+	<div id="board" style="position: relative; box-shadow: 0px 0px 3px #000000; width: <%= Integer(@board.width) * 64 %>px; height: <%= Integer(@board.height) * 64 %>px;">
+		<% @board.advertisements.each do |advertisement| %>
+		<div style="position: absolute; left: <%= advertisement.x_location * 64 %>px; top: <%= advertisement.y_location * 64 %>px; width: <%= advertisement.width * 64 %>px; height: <%= advertisement.height * 64 %>px; background: url('/images/<%= advertisement.id %>');"></div>
+		<% end %>
 </div>
 <br>
 <div>
@@ -11,5 +15,5 @@
 	<div style='color:white;'><%= "Created by: #{@board.user.name}" %></div>
 	<div style='color:white;'><%= "Width: #{pluralize(@board.width, 'tile')}" %></div>
 	<div style='color:white;'><%= "Height: #{pluralize(@board.height, 'tile')}" %></div>
-	<div style='color:white;'><%= link_to "Create advertisement", '#', query: @board.id, class: "btn btn-medium btn-inverse" %></div>
+	<div style='color:white;'><%= link_to "Create advertisement", new_board_advertisement_path(@board), query: @board.id, class: "btn btn-medium btn-inverse" %></div>
 </div>

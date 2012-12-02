@@ -1,7 +1,11 @@
 ElectronicBulletinBoard::Application.routes.draw do
+  get "advertisements/new"
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :boards
+  resources :boards do
+    resources :advertisements
+  end
 
   root to: "static_pages#home"
 

@@ -1,0 +1,27 @@
+<% provide(:title, "Create Advertisement") %>
+<h1>Create Advertisment</h1>
+
+<div class="row">
+	<div class="span6 offset">
+	<%= form_for([@board, @advertisement], :html => { :style => 'color:white;' }) do |advertisement| %>
+		<%= render partial: 'shared/error_messages', object: advertisement.object %>
+
+		<%= advertisement.label :x_location %>
+		<%= advertisement.text_field :x_location %>
+
+		<%= advertisement.label :y_location %>
+		<%= advertisement.text_field :y_location %>
+
+		<%= advertisement.label :width %>
+		<%= advertisement.text_field :width %>
+
+		<%= advertisement.label :height %>
+		<%= advertisement.text_field :height %>
+
+		<%= advertisement.label :image %>
+		<%= advertisement.file_field :image %>
+
+		<%= advertisement.submit "Create Advertisement!", class: "btn btn-medium btn-inverse" %>
+	<% end %>
+	</div>
+</div>

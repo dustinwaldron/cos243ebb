@@ -17,6 +17,14 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
+  #Do stuff
+  def charge
+  end
+
+  def image_contents=(image)
+	image.read()
+  end
+
   private 
   def size_check
 		if x_location.is_a?(Integer) && y_location.is_a?(Integer) && width.is_a?(Integer) && height.is_a?(Integer)

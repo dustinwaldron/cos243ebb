@@ -11,6 +11,10 @@ class Tile < ActiveRecord::Base
   
   validate :size_check
 
+  #Do stuff
+  def age
+  end
+
   private
   	def size_check
   		if x_location.is_a?(Integer) && y_location.is_a?(Integer)
