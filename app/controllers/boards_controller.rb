@@ -12,7 +12,7 @@ class BoardsController < ApplicationController
 	def create
 		@board = current_user.boards.create(params[:board])
 		if @board.save
-			flash[:success] = "Bulletin Board was created!"
+			flash[:success] = "Board created"
 			redirect_to @board
 		else
 			render 'new'

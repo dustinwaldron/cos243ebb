@@ -10,7 +10,7 @@ class AdvertisementsController < ApplicationController
 		@advertisement.image = @advertisement.image.read()
 		@advertisement.user = current_user
 		if @advertisement.save
-			flash[:success] = "Advertisement created successfully!"
+			flash[:success] = "Advertisement created"
 			redirect_to @board
 		else
 			render 'new'
