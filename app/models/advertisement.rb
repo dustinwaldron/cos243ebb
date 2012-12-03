@@ -21,8 +21,8 @@ class Advertisement < ActiveRecord::Base
   def charge
   end
 
-  def image_contents=(image)
-	image.read()
+  def image_contents=(object)
+	self.image = object.read()
   end
 
   private 
