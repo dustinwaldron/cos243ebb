@@ -7,19 +7,19 @@
 		<%= render partial: 'shared/error_messages', object: advertisement.object %>
 
 		<%= advertisement.label :x_location %>
-		<%= advertisement.text_field :x_location %>
+		<%= advertisement.text_field :x_location, :id => "X Location" %>
 
 		<%= advertisement.label :y_location %>
-		<%= advertisement.text_field :y_location %>
+		<%= advertisement.text_field :y_location, :id => "Y Location" %>
 
 		<%= advertisement.label :width %>
-		<%= advertisement.text_field :width %>
+		<%= advertisement.text_field :width, :id => "Width" %>
 
 		<%= advertisement.label :height %>
-		<%= advertisement.text_field :height %>
+		<%= advertisement.text_field :height, :id => "Height" %>
 
-		<%= advertisement.label :image %>
-		<%= advertisement.file_field :image %>
+		<%= advertisement.label :image_contents %>
+		<%= advertisement.file_field :image_contents %>
 
 		<%= advertisement.submit "Create advertisement", class: "btn btn-medium btn-inverse" %>
 	<% end %>

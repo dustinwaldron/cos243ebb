@@ -17,6 +17,9 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
+  def make_tiles
+  end
+
   #Do stuff
   def charge
   end

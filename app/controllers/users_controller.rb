@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :show]
-  before_filter :admin_user, only: [:index]
   before_filter :current_user, only: [:show]
+  before_filter :admin_user, only: [:index]
 
 	def show
 		@user = User.find(params[:id])
@@ -52,6 +52,8 @@ class UsersController < ApplicationController
 			User.find(params[:id]).destroy
 			flash[:success] = "User destroyed."
 			redirect_to users_url
+		else
+			redirect_to root_path
 		end
 	end
 
@@ -71,9 +73,9 @@ class UsersController < ApplicationController
 
 	def correct_user
 		@user = User.find(params[:id])
-
-		unless current_user?(@user)
-			redirect_to(user_path(current_user), flash: { error: "Wrong user!" })
-		end
+		redirect_to(root_path) unless current_user.admin?
+		#unless current_user?(@user)
+		#	redirect_to(user_path(current_user), flash: { error: "Wrong user!" })
+		#end
 	end
 end

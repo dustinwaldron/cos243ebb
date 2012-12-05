@@ -31,3 +31,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
+
+gem 'win32console', :platforms => :mingw
