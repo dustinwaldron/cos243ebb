@@ -17,25 +17,20 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
-  #after_save :make_tiles
+  #before_save :make_tiles
 
 
 
   def make_tiles
   	for x in x_location..(x_location + width) do 
   		for y in y_location..(y_location + height) do
-  			tile = tiles.build()
-  			tile.advertisement = self
-  			tile.x_location = x
-  			tile.y_location = y
-  			tile.cost = 1
+  			tile = tiles.build(:x_location => x, :y_location => y, :cost => 1)
   		end
   	end
   end
 
   def calculate_cost
-  	@current_board = Board.find_by_id(board_id)
-  	@all_tiles = Tile.find(:all, :conditions => { :x_location => x_location, :y_location => y_location, :advertisement_id => advertisement_id})
+  	tiles.find(:all, :conditions => { :x_location => x_location, :y_location => y_location, :advertisement_id => advertisement_id})
 
   end
 
