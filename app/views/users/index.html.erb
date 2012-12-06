@@ -3,7 +3,7 @@
 
 <ul class="users">
 	<% @users.each do |user| %>
-    <li>
+    <li style="font-size:24px;">
 		<%= gravatar_for user, size: 52 %>
 		<%= link_to user.name, user %>
 		<% if current_user.admin? && !current_user?(user) %>

@@ -1,4 +1,5 @@
 class AdvertisementsController < ApplicationController
+	before_filter :signed_in_user, only: [:new, :create]
 
 	def new
 		@board = Board.find(params[:board_id])

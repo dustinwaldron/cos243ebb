@@ -13,13 +13,13 @@
 		<%= advertisement.text_field :y_location, :id => "Y Location" %>
 
 		<%= advertisement.label :width %>
-		<%= advertisement.text_field :width, :id => "Width" %>
+		<%= advertisement.text_field :width %>
 
 		<%= advertisement.label :height %>
-		<%= advertisement.text_field :height, :id => "Height" %>
+		<%= advertisement.text_field :height %>
 
 		<%= advertisement.label :image_contents %>
-		<%= advertisement.file_field :image_contents %>
+		<%= advertisement.file_field :image_contents  %>
 
 		<%= advertisement.submit "Create advertisement", class: "btn btn-medium btn-inverse" %>
 	<% end %>

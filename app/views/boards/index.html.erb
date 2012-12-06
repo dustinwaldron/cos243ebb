@@ -3,9 +3,10 @@
 
 <ul class="boards">
 	<% @boards.each do |board| %>
-	<li>
-		<%= link_to board.name, board %>
-		(<%= board.width %>x<%= board.height %>)
+	<li style="color:white; list-style-type: none; font-size:24px;">
+		<% @user = User.find(board.user_id) %>
+		<%= gravatar_for @user, size: 52 %>
+		<%= link_to board.name, board %> (<%= board.width %>x<%= board.height %>)
 	</li>
 	<% end %>
 </ul>
