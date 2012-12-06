@@ -17,14 +17,14 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
-  #before_save :make_tiles
+  before_create :make_tiles
 
 
 
   def make_tiles
   	for x in x_location..(x_location + width) do 
   		for y in y_location..(y_location + height) do
-  			tile = tiles.build(:x_location => x, :y_location => y, :cost => 1)
+  			tile = tiles.build(:x_location => x, :y_location => y)
   		end
   	end
   end

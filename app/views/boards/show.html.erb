@@ -17,3 +17,30 @@
 	<div style='color:white;'><%= "Height: #{pluralize(@board.height, 'tile')}" %></div>
 	<div style='color:white;'><%= button_to "Create advertisement", new_board_advertisement_path(@board), query: @board.id, :method => "get", class: "btn btn-medium btn-inverse" %></div>
 </div>
+<h2>Advertisements in <%= @board.name %> </h2>
+<div style="width:500px;">
+	<ul>
+	  <% @board.advertisements.each do |ad| %>
+	  <ul class="ads">
+		<li style="color: white;">
+		    <%= "Posted By: #{ad.user.name}" %>
+		</li>
+		<li style="color: white;">
+		    <%= "Date Posted: #{ad.created_at.to_s[0,11]} #{@board.timezone}" %>
+		</li>
+		<li style="color: white;">
+		    <%= "X Location: #{ad.x_location}" %>
+		</li>
+		<li style="color: white;">
+		    <%= "Y Location: #{ad.y_location}" %>
+		</li>
+		<li style="color: white;">
+		    <%= "Width: #{ad.width}" %>
+		</li>
+		<li style="color: white;">
+		    <%= "Height: #{ad.height}" %>
+		</li>
+	  </ul>
+	 <% end %>
+	</ul>
+</div>

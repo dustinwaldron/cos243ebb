@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :show]
-  before_filter :current_user, only: [:show]
+  before_filter :correct_user, only: [:show]
   before_filter :admin_user, only: [:index]
 
 	def show
@@ -73,7 +73,9 @@ class UsersController < ApplicationController
 
 	def correct_user
 		@user = User.find(params[:id])
-		redirect_to(root_path) unless current_user.admin?
+		unless current_user?(@user)  #current_user.admin?
+			redirect_to(root_path, flash: { error: "Wrong user!" })
+		end
 		#unless current_user?(@user)
 		#	redirect_to(user_path(current_user), flash: { error: "Wrong user!" })
 		#end

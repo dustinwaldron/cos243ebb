@@ -16,7 +16,7 @@ class Board < ActiveRecord::Base
   validates :timezone, presence: true
   validates_inclusion_of :timezone, in: ActiveSupport::TimeZone.zones_map { |m| m.name }, message: "is not a valid Timezone"
 
-  #before_save :make_fake_ad
+  before_create :make_fake_ad
 
   #Do stuff
   def age
@@ -24,7 +24,7 @@ class Board < ActiveRecord::Base
 
   def make_fake_ad
     ad = advertisements.build(:image => 'rails.png', :x_location => 0, :y_location => 0, :width => width, :height => height)
-    ad.user = current_user
+    ad.user = user
   end
 
 end
