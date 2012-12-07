@@ -17,21 +17,20 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
-  before_create :make_tiles
+  after_validation :make_tiles, :on => :build
 
-
-
-  def make_tiles
-  	for x in x_location..(x_location + width) do 
-  		for y in y_location..(y_location + height) do
-  			tile = tiles.build(:x_location => x, :y_location => y)
-  		end
-  	end
-  end
 
   def calculate_cost
   	tiles.find(:all, :conditions => { :x_location => x_location, :y_location => y_location, :advertisement_id => advertisement_id})
 
+  end
+
+  def make_tiles
+	  	for x in x_location..(x_location + width - 1) do 
+	  		for y in y_location..(y_location + height - 1) do
+	  			tile = tiles.build(:x_location => x, :y_location => y)
+	  		end
+	  	end
   end
 
   #Do stuff
