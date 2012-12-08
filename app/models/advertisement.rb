@@ -2,7 +2,7 @@ class Advertisement < ActiveRecord::Base
   attr_accessible :height, :image, :width, :x_location, :y_location
   attr_protected :board_id, :user_id
 
-  has_many :payment_details, as: :payable
+  has_many :payment_details, :as => :payable
   has_many :tiles
   belongs_to :board 
   belongs_to :user
@@ -17,7 +17,8 @@ class Advertisement < ActiveRecord::Base
 
   validate :size_check
 
-  after_validation :make_tiles, :on => :build
+  before_create :make_tiles
+  before_create :make_payment_details
 
 
   def calculate_cost
@@ -25,10 +26,27 @@ class Advertisement < ActiveRecord::Base
 
   end
 
+  def make_payment_details
+  	cost = 1 #make cost function
+  	if !(board.payment_detail.nil?)
+  		pd = payment_details.build(:amount => width*height)
+  		pd.user = user
+  	end
+  end
+
   def make_tiles
 	  	for x in x_location..(x_location + width - 1) do 
 	  		for y in y_location..(y_location + height - 1) do
-	  			tile = tiles.build(:x_location => x, :y_location => y)
+	  			t = board.tiles.where(:x_location => x, :y_location => y).first
+	  			if t.nil?
+		  			t = tiles.build(:x_location => x, :y_location => y)
+		  			t.cost = 1
+		  		else
+		  			t.destroy
+		  			t = tiles.build(:x_location => x, :y_location => y)
+		  			t.cost = 1
+		  		end
+
 	  		end
 	  	end
   end

@@ -4,6 +4,7 @@ ElectronicBulletinBoard::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :boards do
+    resources :payment_details
     resources :advertisements
   end
   resources :images
