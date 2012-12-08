@@ -17,10 +17,10 @@ class Board < ActiveRecord::Base
   validates_inclusion_of :timezone, in: ActiveSupport::TimeZone.zones_map { |m| m.name }, message: "is not a valid Timezone"
 
   before_create :make_fake_ad
-  #before_create :make_payment_detail
 
   #Do stuff
   def age
+
   end
 
   def make_fake_ad

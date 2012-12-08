@@ -1,5 +1,5 @@
 class Tile < ActiveRecord::Base
-  attr_accessible  :x_location, :y_location
+  attr_accessible  :x_location, :y_location, :cost
   attr_protected :advertisement_id, :board_id, :cost
 
   belongs_to :advertisement
@@ -13,6 +13,17 @@ class Tile < ActiveRecord::Base
 
   #Do stuff
   def age
+      for x in x_location..(x_location + width - 1) do
+        for y in y_location..(y_location + height - 1) do
+          tile = board.tiles.where(:x_location => x, :y_location => y).first
+          tile_cost = tile.cost.to_f
+          tile_cost = tile_cost * 0.5
+          if tile_cost < 0.01
+            tile_cost = 0.0
+          end
+          tile.cost = tile_cost
+        end
+      end
   end
 
   private
@@ -43,6 +54,5 @@ class Tile < ActiveRecord::Base
   			end
   		end
   	end
-
 
 end
