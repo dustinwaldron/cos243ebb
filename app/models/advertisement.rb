@@ -18,21 +18,19 @@ class Advertisement < ActiveRecord::Base
   validate :size_check
 
   before_create :make_tiles
-  before_create :charge
+  after_create :charge
 
 
   def charge
-  	total_cost = 0 
+  	total_cost = 0.0 
   	if !(board.payment_detail.nil?)
-
-  		# ------- Code fails here :'( -----------
-  		# for x in x_location..(x_location + width - 1) do
-  		# 	for y in y_location..(y_location + height - 1) do
-  		# 		tile_cost = board.tiles.where(:x_location => x, :y_location => y).first.cost.to_f
-  		# 		total_cost = total_cost + tile_cost
-  		# 	end
-  		# end
-  		pd = payment_details.build(:amount => width*height) #use total_cost in place of width x height
+  		for x in x_location..(x_location + width - 1) do
+  			for y in y_location..(y_location + height - 1) do
+  				tile_cost = board.tiles.where(:x_location => x, :y_location => y).first[:cost]
+  				total_cost = total_cost + tile_cost.to_f
+  			end
+  		end
+  		pd = payment_details.create(:amount => total_cost) #use total_cost in place of width x height
   		pd.user = user
   	end
   end
@@ -45,7 +43,7 @@ class Advertisement < ActiveRecord::Base
 		  			t = tiles.build(:x_location => x, :y_location => y)
 		  			t.cost = 0
 		  		else
-		  			prev_cost = t.cost
+		  			prev_cost = t[:cost]
 		  			t.destroy
 		  			t = tiles.build(:x_location => x, :y_location => y)
 		  			new_cost = 2 * prev_cost
@@ -53,7 +51,7 @@ class Advertisement < ActiveRecord::Base
 		  				new_cost = 1
 		  			end
 		  			new_cost = new_cost.to_f
-		  			t.cost = new_cost
+		  			t[:cost] = new_cost
 		  		end
 
 	  		end

@@ -1,5 +1,5 @@
 class Tile < ActiveRecord::Base
-  attr_accessible  :x_location, :y_location, :cost
+  attr_accessible  :x_location, :y_location
   attr_protected :advertisement_id, :board_id, :cost
 
   belongs_to :advertisement
@@ -7,7 +7,7 @@ class Tile < ActiveRecord::Base
 
   validates :x_location, presence: true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0}
   validates :y_location, presence: true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0}
-  validates :cost, presence: true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :cost, presence: true, :numericality => {:greater_than_or_equal_to => 0, :precision => 2}
   
   validate :size_check
 
